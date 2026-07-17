@@ -1,0 +1,6 @@
+/* Резервное оформление для внешнего изображения, недоступного в исходной подборке. */
+img[alt*="Плед"] {
+    background: #d8cfbf url("https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=700&q=85") center / cover no-repeat;
+    color: transparent;
+    font-size: 0;
+}

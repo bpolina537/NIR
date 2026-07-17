@@ -1,18 +1,7 @@
-<?php
-
-declare(strict_types=1);
-
-?><!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Атмосфера — товары для дома и декора</title>
-</head>
-<body>
-    <main>
-        <h1>Атмосфера</h1>
-        <p>Товары для дома и декора.</p>
-    </main>
-</body>
-</html>
+<?php $title='Атмосфера — товары для дома'; $page='home'; require 'partials/header.php'; ?>
+<section class="hero"><div class="hero-copy"><span class="eyebrow">Новая коллекция · 2026</span><h1>Дом начинается<br>с атмосферы</h1><p>Продуманные предметы для спокойной, красивой и уютной жизни.</p><a class="button" href="catalog.php">Смотреть коллекцию <span>→</span></a></div><div class="hero-photo"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=85" alt="Современный интерьер"><div class="photo-note">Натуральные материалы<br><b>и спокойные оттенки</b></div></div></section>
+<section class="section intro" id="about"><span class="eyebrow">Для вашего пространства</span><h2>Вещи, которые хочется<br>оставить надолго</h2><p>Мы собираем функциональные предметы для дома: текстиль, свет, декор и аксессуары. Каждая вещь сочетается с другими и помогает создать цельный интерьер.</p></section>
+<section class="categories"><a class="category large" href="catalog.php"><img src="https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=900&q=85" alt="Декор"><span>Декор <b>24 товара →</b></span></a><a class="category" href="catalog.php"><img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=800&q=85" alt="Текстиль"><span>Текстиль <b>18 товаров →</b></span></a><a class="category" href="catalog.php"><img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=800&q=85" alt="Освещение"><span>Освещение <b>12 товаров →</b></span></a></section>
+<section class="section"><div class="section-head"><div><span class="eyebrow">Выбор покупателей</span><h2>Популярное</h2></div><a href="catalog.php">Весь каталог →</a></div><div class="product-grid"><?php $items=[['Ваза «Линия»','2 490 ₽','https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=700&q=85'],['Плед «Тёплый песок»','3 690 ₽','https://images.unsplash.com/photo-1583845112203-454c2254edcf?auto=format&fit=crop&w=700&q=85'],['Лампа «Рассвет»','5 990 ₽','https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=85'],['Поднос «Баланс»','1 890 ₽','https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=700&q=85']]; foreach($items as $i=>$item): ?><a class="product-card" href="product.php"><div class="product-image"><img src="<?= $item[2] ?>" alt="<?= $item[0] ?>"><?php if(!$i):?><em>Новинка</em><?php endif;?></div><h3><?= $item[0] ?></h3><p><?= $item[1] ?></p></a><?php endforeach; ?></div></section>
+<section class="manifest"><span>01</span><h2>Меньше случайных вещей.<br>Больше вашего дома.</h2><p>Мы выбираем лаконичный дизайн, честные материалы и производителей, которым доверяем.</p></section>
+<?php require 'partials/footer.php'; ?>
