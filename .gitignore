@@ -1,0 +1,12 @@
+.idea/
+.env
+vendor/
+node_modules/
+storage/cache/*
+!storage/cache/.gitkeep
+storage/database/*.sqlite
+!storage/database/.gitkeep
+*.log
+.DS_Store
+Thumbs.db
+
