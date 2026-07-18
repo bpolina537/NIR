@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^api/products/?$ api/products.php [QSA,L]
+RewriteRule ^api/products/([0-9]+)/?$ api/products.php?id=$1 [QSA,L]
