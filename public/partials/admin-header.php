@@ -12,6 +12,9 @@
     <?php if (($adminPage ?? '') === 'task-1'): ?>
         <link rel="stylesheet" href="assets/css/task.css">
     <?php endif; ?>
+    <?php if (($adminPage ?? '') === 'products'): ?>
+        <link rel="stylesheet" href="assets/css/products-table.css">
+    <?php endif; ?>
 </head>
 <body class="admin-body">
 <header class="admin-topbar">
@@ -23,7 +26,7 @@
         <nav>
             <a class="<?= ($adminPage ?? '') === 'dashboard' ? 'active' : '' ?>" href="admin.php">Обзор</a>
             <a class="<?= ($adminPage ?? '') === 'task-1' ? 'active' : '' ?>" href="js-task-1.php">Настройка элемента</a>
-            <span>Товары</span>
+            <a class="<?= ($adminPage ?? '') === 'products' ? 'active' : '' ?>" href="products-table.php">Товары</a>
             <span>Заказы</span>
             <span>Учётная таблица</span>
             <span>Статистика</span>

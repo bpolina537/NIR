@@ -20,12 +20,12 @@ require 'partials/admin-header.php';
         <p>Изменение ширины, высоты и цвета демонстрационного блока.</p>
         <b>Готово к проверке →</b>
     </a>
-    <article class="admin-card">
+    <a class="admin-card ready" href="products-table.php">
         <span>Магазин</span>
         <h2>Товары и остатки</h2>
-        <p>Раздел появится после выполнения заданий с JSON и REST API.</p>
-        <b>Запланировано</b>
-    </article>
+        <p>Загрузка JSON, расчёт суммы и фильтрация товаров по цене.</p>
+        <b>Открыть таблицу →</b>
+    </a>
     <article class="admin-card">
         <span>Аналитика</span>
         <h2>Статистика</h2>
