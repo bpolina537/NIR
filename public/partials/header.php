@@ -13,6 +13,9 @@ $page = $page ?? '';
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/fallbacks.css">
+    <?php if (($page ?? '') === 'task-1'): ?>
+        <link rel="stylesheet" href="assets/css/task.css">
+    <?php endif; ?>
 </head>
 <body>
 <div class="topline">Бесплатная доставка заказов от 5 000 ₽</div>
