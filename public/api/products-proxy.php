@@ -18,7 +18,12 @@ $context = stream_context_create([
         'method' => 'GET',
         'timeout' => 12,
         'ignore_errors' => true,
-        'header' => "Accept: application/json\r\n" . $credentials,
+        'follow_location' => 1,
+        'max_redirects' => 5,
+        'header' => "Accept: application/json\r\n"
+            . "Accept-Encoding: identity\r\n"
+            . "User-Agent: NIR-Atmosfera/1.0\r\n"
+            . $credentials,
     ],
     // У учебного сервиса некорректный сертификат. Проверка отключена только для этого запроса.
     'ssl' => [
@@ -36,6 +41,22 @@ $payload = false;
 
 foreach ($urls as $url) {
     $payload = @file_get_contents($url, false, $context);
+
+    $status = 0;
+    foreach ($http_response_header ?? [] as $header) {
+        if (preg_match('/^HTTP\/\S+\s+(\d{3})/', $header, $matches)) {
+            $status = (int) $matches[1];
+        }
+    }
+
+    if ($status === 401) {
+        http_response_code(502);
+        echo json_encode([
+            'error' => 'Для внешнего сервиса не настроены логин и пароль',
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
     if ($payload !== false && trim($payload) !== '') {
         break;
     }
@@ -49,7 +70,15 @@ if ($payload === false || trim($payload) === '') {
     exit;
 }
 
+$payload = preg_replace('/^\xEF\xBB\xBF/', '', $payload) ?? $payload;
 $products = json_decode($payload, true);
+
+if (!is_array($products) && function_exists('iconv')) {
+    $utf8Payload = @iconv('Windows-1251', 'UTF-8//IGNORE', $payload);
+    if ($utf8Payload !== false) {
+        $products = json_decode($utf8Payload, true);
+    }
+}
 
 if (!is_array($products)) {
     http_response_code(502);

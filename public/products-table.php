@@ -14,11 +14,11 @@ require 'partials/admin-header.php';
     <form class="products-filter" id="products-filter" novalidate>
         <div>
             <label for="price-from">Цена от</label>
-            <input id="price-from" type="number" min="0" step="1" value="0" inputmode="numeric">
+            <input id="price-from" type="number" min="0" step="any" value="0" inputmode="decimal" required>
         </div>
         <div>
             <label for="price-to">Цена до</label>
-            <input id="price-to" type="number" min="0" step="1" value="0" inputmode="numeric">
+            <input id="price-to" type="number" min="0" step="any" value="0" inputmode="decimal" required>
         </div>
         <button class="admin-primary" type="submit">Применить фильтр</button>
         <button class="filter-reset" id="filter-reset" type="button">Сбросить</button>

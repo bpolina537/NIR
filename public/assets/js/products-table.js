@@ -81,7 +81,9 @@ function renderProducts(items) {
 function readPrice(input, label) {
     const value = input.value.trim();
 
-    if (value === '') return 0;
+    if (value === '') {
+        throw new Error(`${label}: заполните поле числом, для отсутствия границы укажите 0`);
+    }
 
     const number = Number(value);
     if (!Number.isFinite(number) || number < 0) {
@@ -106,6 +108,7 @@ function applyFilter() {
         });
 
         renderProducts(filtered);
+        notice.textContent = `Фильтр применён: показано ${filtered.length} из ${products.length} товаров`;
     } catch (error) {
         errorBox.textContent = error.message;
     }
@@ -143,6 +146,7 @@ resetButton.addEventListener('click', () => {
     priceFromInput.value = '0';
     priceToInput.value = '0';
     renderProducts(products);
+    notice.textContent = `Фильтр сброшен: показаны все товары (${products.length})`;
 });
 
 loadProducts().catch((error) => {
