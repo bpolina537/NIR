@@ -26,11 +26,11 @@ require 'partials/admin-header.php';
         <p>Загрузка JSON, расчёт суммы и фильтрация товаров по цене.</p>
         <b>Открыть таблицу →</b>
     </a>
-    <article class="admin-card">
+    <a class="admin-card ready" href="cpu-monitor.php">
         <span>Аналитика</span>
-        <h2>Статистика</h2>
-        <p>Посещения и мониторинг сервера будут добавлены на следующих этапах.</p>
-        <b>Запланировано</b>
-    </article>
+        <h2>Загрузка процессора</h2>
+        <p>Динамический график с обновлением данных каждые пять секунд.</p>
+        <b>Открыть мониторинг →</b>
+    </a>
 </section>
 <?php require 'partials/admin-footer.php'; ?>
