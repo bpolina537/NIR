@@ -1,4 +1,4 @@
-<?php $title='Оформление заказа'; $page='checkout'; require 'partials/header.php'; ?>
+<?php require 'lib/store-products.php'; $title='Оформление заказа'; $page='checkout'; require 'partials/header.php'; ?>
 <section class="page-hero compact"><span class="eyebrow">Последний шаг</span><h1>Оформление заказа</h1></section>
 <section class="checkout">
 <form class="checkout-form" id="checkout-form" novalidate>
@@ -16,6 +16,22 @@
             <label><input type="radio" name="delivery" value="courier" checked><b>Курьером</b><small>от 350 ₽ · 2-4 дня</small></label>
             <label><input type="radio" name="delivery" value="pickup"><b>Самовывоз</b><small>Бесплатно · сегодня</small></label>
         </div>
+        <div class="delivery-calculator" id="delivery-calculator">
+            <h3>Рассчитать стоимость доставки</h3>
+            <div class="delivery-fields">
+                <label>Город
+                    <select id="delivery-city" required disabled>
+                        <option value="">Загрузка городов…</option>
+                    </select>
+                </label>
+                <label>Вес заказа, кг (подставлен из корзины)
+                    <input id="delivery-weight" type="number" min="1" step="1" value="1" required>
+                </label>
+            </div>
+            <button class="button" id="calculate-delivery" type="button" disabled>Рассчитать</button>
+            <div class="cache-info" id="cities-cache-info"></div>
+            <div class="form-result" id="delivery-result" role="status" aria-live="polite"></div>
+        </div>
         <div id="map" style="width:100%;height:300px;margin-top:18px;background:#f4f0e8"></div>
         <input type="hidden" id="map-lat" name="lat">
         <input type="hidden" id="map-lng" name="lng">
@@ -31,17 +47,20 @@
 </form>
 <aside class="order">
     <h2>Ваш заказ</h2>
-    <div class="order-item"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=200&q=80" alt="Vase"><div><b>Ваза «Линия»</b><small>Песочный · 1 шт.</small><p>2 490 ₽</p></div></div>
-    <div class="order-item"><img src="https://images.unsplash.com/photo-1583845112203-454c2254edcf?auto=format&fit=crop&w=200&q=80" alt="Pled"><div><b>Плед «Тёплый песок»</b><small>Бежевый · 1 шт.</small><p>3 690 ₽</p></div></div>
+    <div id="checkout-items"></div>
+    <div class="cart-empty" id="checkout-empty" hidden>Нет выбранных товаров<br><a href="cart.php">Вернуться в корзину</a></div>
     <dl>
-        <div><dt>Товары</dt><dd>6 180 ₽</dd></div>
-        <div><dt>Доставка</dt><dd>Бесплатно</dd></div>
-        <div class="total"><dt>Итого</dt><dd>6 180 ₽</dd></div>
+        <div><dt>Товары</dt><dd id="checkout-products-total">0 ₽</dd></div>
+        <div><dt>Доставка</dt><dd id="checkout-delivery-price">Не рассчитана</dd></div>
+        <div><dt>Срок доставки</dt><dd id="checkout-delivery-term">—</dd></div>
+        <div class="total"><dt>Итого</dt><dd id="checkout-total">0 ₽</dd></div>
     </dl>
     <button class="button full" type="button" id="submit-order">Оформить заказ</button>
     <small>Нажимая кнопку вы соглашаетесь.</small>
 </aside>
 </section>
 <script src="https://api-maps.yandex.ru/2.1/?apikey=ec6d1b31-d0d2-43af-9686-e448f71e1ad9&lang=ru_RU"></script>
-<script src="assets/js/checkout.js"></script>
+<script>window.STORE_PRODUCTS = <?= storeProductsForJs() ?>;</script>
+<script src="assets/js/checkout.js?v=<?= filemtime(__DIR__ . '/assets/js/checkout.js') ?>"></script>
+<script src="assets/js/delivery.js?v=<?= filemtime(__DIR__ . '/assets/js/delivery.js') ?>"></script>
 <?php require 'partials/footer.php'; ?>
