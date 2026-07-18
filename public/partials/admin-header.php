@@ -18,6 +18,9 @@
     <?php if (($adminPage ?? '') === 'cpu'): ?>
         <link rel="stylesheet" href="assets/css/cpu-monitor.css">
     <?php endif; ?>
+    <?php if (($adminPage ?? '') === 'spreadsheet'): ?>
+        <link rel="stylesheet" href="assets/css/spreadsheet.css">
+    <?php endif; ?>
 </head>
 <body class="admin-body">
 <header class="admin-topbar">
@@ -32,7 +35,7 @@
             <a class="<?= ($adminPage ?? '') === 'products' ? 'active' : '' ?>" href="products-table.php">Товары</a>
             <a class="<?= ($adminPage ?? '') === 'cpu' ? 'active' : '' ?>" href="cpu-monitor.php">Мониторинг</a>
             <span>Заказы</span>
-            <span>Учётная таблица</span>
+            <a class="<?= ($adminPage ?? '') === 'spreadsheet' ? 'active' : '' ?>" href="spreadsheet.php">Учётная таблица</a>
             <span>Статистика</span>
         </nav>
         <small>Вход владельца будет защищён после подключения PHP и базы данных.</small>

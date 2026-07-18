@@ -32,5 +32,11 @@ require 'partials/admin-header.php';
         <p>Динамический график с обновлением данных каждые пять секунд.</p>
         <b>Открыть мониторинг →</b>
     </a>
+    <a class="admin-card ready" href="spreadsheet.php">
+        <span>JavaScript 05</span>
+        <h2>Учётная таблица</h2>
+        <p>Редактирование ячеек и сохранение данных в локальном хранилище.</p>
+        <b>Открыть таблицу →</b>
+    </a>
 </section>
 <?php require 'partials/admin-footer.php'; ?>
