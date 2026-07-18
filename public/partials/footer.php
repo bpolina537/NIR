@@ -2,7 +2,6 @@
     <div>
         <a class="logo light" href="index.php">АТМОСФЕРА<span>дом в деталях</span></a>
         <p>Предметы, с которыми дом становится вашим.</p>
-        <a href="login.php">Вход для владельца →</a>
     </div>
     <div>
         <h3>Покупателям</h3>
@@ -22,6 +21,10 @@
         <form class="subscribe"><input type="email" placeholder="Ваш email"><button>→</button></form>
     </div>
 </footer>
+<a class="technical-link" href="admin.php" aria-label="Открыть технические задания">
+    <span aria-hidden="true">&lt;/&gt;</span>
+    <b>Технические задания</b>
+</a>
 <div class="copyright">© 2026 «АТМОСФЕРА» · Учебный проект</div>
 </body>
 </html>

@@ -1,0 +1,2 @@
+.technical-cards{margin:0;padding:60px 6vw 90px;background:#f3f0e8}
+@media(max-width:900px){.technical-cards{grid-template-columns:1fr}}

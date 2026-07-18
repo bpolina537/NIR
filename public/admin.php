@@ -1,28 +1,31 @@
 <?php
 
-$title = 'Панель владельца — Атмосфера';
-$adminPage = 'dashboard';
-require 'partials/admin-header.php';
+$title = 'Технические задания — Атмосфера';
+$page = 'technical';
+require 'partials/header.php';
 ?>
-<section class="admin-welcome">
-    <div>
-        <span class="admin-kicker">Панель управления</span>
-        <h1>Добро пожаловать</h1>
-        <p>Здесь будут собраны инструменты владельца магазина: товары, заказы, учёт и статистика.</p>
-    </div>
-    <a class="admin-primary" href="js-task-1.php">Открыть задание № 1 →</a>
+<section class="page-hero compact">
+    <span class="eyebrow">Производственная практика</span>
+    <h1>Технические задания</h1>
+    <p>Демонстрационные страницы выполненных заданий JavaScript, PHP и SQL</p>
 </section>
 
-<section class="admin-cards">
+<section class="admin-cards technical-cards">
     <a class="admin-card ready" href="js-task-1.php">
         <span>JavaScript 01</span>
         <h2>Настройка элемента</h2>
         <p>Изменение ширины, высоты и цвета демонстрационного блока.</p>
         <b>Готово к проверке →</b>
     </a>
+    <a class="admin-card ready" href="checkout.php">
+        <span>JavaScript 02</span>
+        <h2>Оформление заказа</h2>
+        <p>Валидация формы, ограничение комментария и выбор координат на карте.</p>
+        <b>Открыть задание →</b>
+    </a>
     <a class="admin-card ready" href="products-table.php">
-        <span>Магазин</span>
-        <h2>Товары и остатки</h2>
+        <span>JavaScript 03</span>
+        <h2>Таблица товаров</h2>
         <p>Загрузка JSON, расчёт суммы и фильтрация товаров по цене.</p>
         <b>Открыть таблицу →</b>
     </a>
@@ -39,4 +42,4 @@ require 'partials/admin-header.php';
         <b>Открыть таблицу →</b>
     </a>
 </section>
-<?php require 'partials/admin-footer.php'; ?>
+<?php require 'partials/footer.php'; ?>

@@ -16,6 +16,10 @@ $page = $page ?? '';
     <?php if (($page ?? '') === 'task-1'): ?>
         <link rel="stylesheet" href="assets/css/task.css">
     <?php endif; ?>
+    <?php if (($page ?? '') === 'technical'): ?>
+        <link rel="stylesheet" href="assets/css/admin.css">
+        <link rel="stylesheet" href="assets/css/technical.css">
+    <?php endif; ?>
 </head>
 <body>
 <div class="topline">Бесплатная доставка заказов от 5 000 ₽</div>
