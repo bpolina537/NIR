@@ -7,6 +7,7 @@
         <h3>Покупателям</h3>
         <a href="catalog.php">Каталог</a>
         <a href="checkout.php">Доставка и оплата</a>
+        <a href="guestbook.php">Отзывы</a>
         <a href="#">Возврат</a>
     </div>
     <div>
@@ -21,10 +22,7 @@
         <form class="subscribe"><input type="email" placeholder="Ваш email"><button>→</button></form>
     </div>
 </footer>
-<a class="technical-link" href="admin.php" aria-label="Открыть технические задания">
-    <span aria-hidden="true">&lt;/&gt;</span>
-    <b>Технические задания</b>
-</a>
+<?php require __DIR__ . '/site-counter.php'; ?>
 <div class="copyright">© 2026 «АТМОСФЕРА» · Учебный проект</div>
 </body>
 </html>
