@@ -17,12 +17,6 @@ require 'partials/header.php';
         <p>Изменение ширины, высоты и цвета демонстрационного блока.</p>
         <b>Готово к проверке →</b>
     </a>
-    <a class="admin-card ready" href="checkout.php">
-        <span>JavaScript 02</span>
-        <h2>Оформление заказа</h2>
-        <p>Валидация формы, ограничение комментария и выбор координат на карте.</p>
-        <b>Открыть задание →</b>
-    </a>
     <a class="admin-card ready" href="products-table.php">
         <span>JavaScript 03</span>
         <h2>Таблица товаров</h2>
@@ -40,6 +34,12 @@ require 'partials/header.php';
         <h2>Учётная таблица</h2>
         <p>Редактирование ячеек и сохранение данных в локальном хранилище.</p>
         <b>Открыть таблицу →</b>
+    </a>
+    <a class="admin-card ready" href="rest-api.php">
+        <span>PHP / SQL 04</span>
+        <h2>REST API товаров</h2>
+        <p>Получение, создание, изменение и удаление товаров в формате JSON.</p>
+        <b>Открыть задание →</b>
     </a>
 </section>
 <?php require 'partials/footer.php'; ?>

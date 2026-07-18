@@ -21,6 +21,10 @@
     <?php if (($adminPage ?? '') === 'spreadsheet'): ?>
         <link rel="stylesheet" href="assets/css/spreadsheet.css">
     <?php endif; ?>
+    <?php if (str_starts_with(($adminPage ?? ''), 'php-')): ?>
+        <link rel="stylesheet" href="assets/css/php-tasks.css">
+        <link rel="stylesheet" href="assets/css/php-buttons.css">
+    <?php endif; ?>
 </head>
 <body class="admin-body">
 <header class="admin-topbar">
@@ -36,7 +40,7 @@
             <a class="<?= ($adminPage ?? '') === 'products' ? 'active' : '' ?>" href="products-table.php">JS 3 · Товары</a>
             <a class="<?= ($adminPage ?? '') === 'cpu' ? 'active' : '' ?>" href="cpu-monitor.php">JS 4 · График</a>
             <a class="<?= ($adminPage ?? '') === 'spreadsheet' ? 'active' : '' ?>" href="spreadsheet.php">JS 5 · Таблица</a>
-            <span>PHP/SQL · следующий этап</span>
+            <a class="<?= ($adminPage ?? '') === 'php-rest' ? 'active' : '' ?>" href="rest-api.php">PHP 4 · REST API</a>
         </nav>
         <small>Учебные модули производственной практики. Авторизация для их просмотра не требуется.</small>
     </aside>
