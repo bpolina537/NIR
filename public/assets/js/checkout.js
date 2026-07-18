@@ -43,7 +43,7 @@ if (submitBtn) {
 
         if (!fio) { errors.push('Не заполнено поле ФИО'); }
         if (!phone) { errors.push('Не заполнено поле «Телефон»'); }
-        else { var digits = phone.replace(/[^0-9]/g, ''); if (!digits || digits.length < 7) { errors.push('Телефон должен содержать только числа'); } }
+        else if (!/^\d{7,15}$/.test(phone)) { errors.push('Телефон должен содержать только 7–15 цифр'); }
         if (email && email.indexOf('@') === -1) { errors.push('Неверный Email (отсутствует собака @)'); }
         if (!lat) { errors.push('Не отмечен адрес доставки'); }
 

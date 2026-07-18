@@ -6,7 +6,7 @@
         <h2>Контактные данные</h2>
         <div class="form-grid">
             <label>ФИО<input type="text" id="fio" placeholder="Иванова Анна Сергеевна"></label>
-            <label>Телефон<input type="tel" id="phone" placeholder="+7 999 000-00-00"></label>
+            <label>Телефон<input type="tel" id="phone" inputmode="numeric" placeholder="79990000000"></label>
             <label class="wide">Email<input type="email" id="email" placeholder="example@mail.ru"></label>
         </div>
     </div></div>
