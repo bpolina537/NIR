@@ -4,7 +4,35 @@
     environment:
       EXERCISE_LOGIN: "${EXERCISE_LOGIN:-}"
       EXERCISE_PASSWORD: "${EXERCISE_PASSWORD:-}"
+      DB_HOST: db
+      DB_NAME: "${DB_NAME:-nir}"
+      DB_USER: "${DB_USER:-nir_user}"
+      DB_PASSWORD: "${DB_PASSWORD:-nir_password}"
+      TZ: Europe/Moscow
     ports:
       - "${APP_PORT:-8080}:80"
     volumes:
       - ./public:/var/www/html
+      - ./storage:/var/www/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: "${DB_NAME:-nir}"
+      MARIADB_USER: "${DB_USER:-nir_user}"
+      MARIADB_PASSWORD: "${DB_PASSWORD:-nir_password}"
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-nir_root_password}"
+      TZ: Europe/Moscow
+    volumes:
+      - nir_database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+
+volumes:
+  nir_database:
