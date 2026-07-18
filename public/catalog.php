@@ -1,3 +1,24 @@
-<?php $title='Каталог — Атмосфера'; $page='catalog'; require 'partials/header.php'; $items=[['Ваза «Линия»','Декор','2 490 ₽','https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=700&q=85'],['Плед «Тёплый песок»','Текстиль','3 690 ₽','https://images.unsplash.com/photo-1583845112203-454c2254edcf?auto=format&fit=crop&w=700&q=85'],['Лампа «Рассвет»','Свет','5 990 ₽','https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=85'],['Поднос «Баланс»','Декор','1 890 ₽','https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=700&q=85'],['Кресло «Облако»','Мебель','19 900 ₽','https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=700&q=85'],['Свеча «Тишина»','Ароматы','990 ₽','https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=85']]; ?>
-<section class="page-hero"><span class="eyebrow">Коллекция для дома</span><h1>Каталог</h1><p>Спокойные формы, натуральные фактуры и вещи, которые легко сочетать.</p></section><section class="catalog-layout"><aside class="filters"><h3>Категории</h3><a class="active" href="#">Все товары <span>48</span></a><a href="#">Декор <span>24</span></a><a href="#">Текстиль <span>18</span></a><a href="#">Освещение <span>12</span></a><a href="#">Мебель <span>8</span></a><h3>Цена</h3><div class="price-fields"><input placeholder="от 500"><input placeholder="до 20 000"></div></aside><div><div class="catalog-toolbar"><p>Найдено: 48 товаров</p><select><option>Сначала популярные</option><option>Сначала дешевле</option><option>Сначала дороже</option></select></div><div class="product-grid catalog-grid"><?php foreach($items as $i=>$item): ?><a class="product-card" href="product.php"><div class="product-image"><img src="<?= $item[3] ?>" alt="<?= $item[0] ?>"><?php if($i===0):?><em>Новинка</em><?php endif;?></div><small><?= $item[1] ?></small><h3><?= $item[0] ?></h3><p><?= $item[2] ?></p></a><?php endforeach;?></div></div></section>
+<?php
+require 'lib/store-products.php';
+$products = storeProducts();
+$title = 'Каталог — Атмосфера';
+$page = 'catalog';
+require 'partials/header.php';
+?>
+<section class="page-hero"><span class="eyebrow">Коллекция для дома</span><h1>Каталог</h1><p>Ровно десять товаров учебного интернет-магазина.</p></section>
+<section class="catalog-layout">
+    <aside class="filters"><h3>Категории</h3><a class="active" href="#">Все товары <span>10</span></a><a href="#">Декор <span>3</span></a><a href="#">Текстиль <span>2</span></a><a href="#">Освещение <span>1</span></a><a href="#">Мебель <span>2</span></a></aside>
+    <div>
+        <div class="catalog-toolbar"><p>Найдено: 10 товаров</p><select id="catalog-sort"><option value="default">Сначала популярные</option><option value="cheap">Сначала дешевле</option><option value="expensive">Сначала дороже</option></select></div>
+        <div class="product-grid catalog-grid" id="catalog-grid">
+            <?php foreach ($products as $product): ?>
+                <article class="product-card" data-price="<?= $product['price'] ?>">
+                    <a href="product.php?id=<?= $product['id'] ?>"><div class="product-image"><img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>"><?php if ($product['id'] === 1): ?><em>Новинка</em><?php endif; ?></div><small><?= htmlspecialchars($product['category']) ?> · <?= $product['weight'] ?> кг</small><h3><?= htmlspecialchars($product['name']) ?></h3><p><?= number_format($product['price'], 0, ',', ' ') ?> ₽</p></a>
+                    <button class="button add-to-cart" type="button" data-product-id="<?= $product['id'] ?>">В корзину</button>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<script src="assets/js/catalog.js" defer></script>
 <?php require 'partials/footer.php'; ?>

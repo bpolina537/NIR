@@ -13,12 +13,19 @@ $page = $page ?? '';
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/fallbacks.css">
+    <link rel="stylesheet" href="assets/css/client-php.css">
+    <link rel="stylesheet" href="assets/css/cart.css">
+    <script src="assets/js/cart-common.js"></script>
     <?php if (($page ?? '') === 'task-1'): ?>
         <link rel="stylesheet" href="assets/css/task.css">
     <?php endif; ?>
     <?php if (($page ?? '') === 'technical'): ?>
         <link rel="stylesheet" href="assets/css/admin.css">
         <link rel="stylesheet" href="assets/css/technical.css">
+    <?php endif; ?>
+    <?php if (in_array(($page ?? ''), ['checkout', 'reviews'], true)): ?>
+        <link rel="stylesheet" href="assets/css/php-tasks.css">
+        <link rel="stylesheet" href="assets/css/php-buttons.css">
     <?php endif; ?>
 </head>
 <body>
@@ -28,12 +35,13 @@ $page = $page ?? '';
     <nav class="nav">
         <a class="<?= $page === 'home' ? 'active' : '' ?>" href="index.php">Главная</a>
         <a class="<?= $page === 'catalog' ? 'active' : '' ?>" href="catalog.php">Каталог</a>
+        <a class="<?= $page === 'reviews' ? 'active' : '' ?>" href="guestbook.php">Отзывы</a>
         <a href="index.php#about">О магазине</a>
-        <a href="#contacts">Контакты</a>
+        <a class="<?= $page === 'technical' ? 'active' : '' ?>" href="admin.php">Задания</a>
     </nav>
     <div class="header-actions">
         <a href="catalog.php" aria-label="Поиск">⌕</a>
-        <a href="checkout.php" aria-label="Корзина">Корзина <b>2</b></a>
+        <a href="cart.php" aria-label="Корзина">Корзина <b id="cart-count">0</b></a>
     </div>
 </header>
 <main>
