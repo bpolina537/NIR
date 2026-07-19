@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require dirname(__DIR__) . '/lib/external-service.php';
+require dirname(__DIR__) . '/lib/delivery-rules.php';
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
@@ -31,19 +32,11 @@ if (filter_var($weightRaw, FILTER_VALIDATE_INT) === false || (int) $weightRaw <=
 }
 
 $weight = (int) $weightRaw;
-if ($city === 'Москва') {
-    $daysFrom = 1; $daysTo = 2;
-} elseif ($city === 'Тула') {
-    $daysFrom = 2; $daysTo = 3;
-} else {
-    $daysFrom = 3 + (abs(crc32($city)) % 2);
-    $daysTo = $daysFrom + 2;
-}
+[$daysFrom, $daysTo] = deliveryTerm($city);
 
 function fallbackDelivery(string $city, int $weight, int $daysFrom, int $daysTo): never
 {
-    $cityRate = 350 + (abs(crc32($city)) % 650);
-    $price = $cityRate + $weight * 45;
+    $price = fallbackDeliveryPrice($city, $weight);
     echo json_encode([
         'status' => 'OK',
         'price' => $price,

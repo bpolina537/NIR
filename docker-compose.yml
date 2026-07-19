@@ -14,6 +14,7 @@
     volumes:
       - ./public:/var/www/html
       - ./storage:/var/www/storage
+      - ./tests:/var/www/tests:ro
     depends_on:
       db:
         condition: service_healthy
