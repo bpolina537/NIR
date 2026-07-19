@@ -9,7 +9,11 @@ require 'partials/header.php';
     <div class="cart-list" id="cart-list"></div>
     <div class="cart-summary" id="cart-summary" hidden><div><span>Выбрано товаров</span><strong id="cart-selected-count">0</strong></div><div><span>Общий вес</span><strong id="cart-selected-weight">0 кг</strong></div><div><span>Сумма</span><strong id="cart-selected-total">0 ₽</strong></div><button class="button" id="cart-checkout" type="button">Перейти к оформлению →</button></div>
     <div class="cart-empty" id="cart-empty" hidden>Корзина пока пуста<br><a class="button" href="catalog.php">Перейти в каталог</a></div>
+    <section class="orders-history" id="orders-history" hidden>
+        <div class="section-head"><div><span class="eyebrow">История покупок</span><h2>Оформленные заказы</h2></div></div>
+        <div class="orders-list" id="orders-list"></div>
+    </section>
 </section>
 <script>window.STORE_PRODUCTS = <?= storeProductsForJs() ?>;</script>
-<script src="assets/js/cart.js" defer></script>
+<script src="assets/js/cart.js?v=<?= filemtime(__DIR__ . '/assets/js/cart.js') ?>" defer></script>
 <?php require 'partials/footer.php'; ?>

@@ -2,6 +2,7 @@
 
 (function () {
     const key = 'atmosfera-cart-v1';
+    const ordersKey = 'atmosfera-orders-v1';
 
     function getCart() {
         try {
@@ -32,7 +33,22 @@
         saveCart(cart);
     }
 
-    window.AtmosferaCart = { getCart, saveCart, updateCount, add };
+    function getOrders() {
+        try {
+            const data = JSON.parse(localStorage.getItem(ordersKey));
+            return Array.isArray(data) ? data : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function saveOrder(order) {
+        const orders = getOrders();
+        orders.unshift(order);
+        localStorage.setItem(ordersKey, JSON.stringify(orders.slice(0, 20)));
+    }
+
+    window.AtmosferaCart = { getCart, saveCart, updateCount, add, getOrders, saveOrder };
 
     document.addEventListener('click', (event) => {
         const button = event.target.closest('.add-to-cart');

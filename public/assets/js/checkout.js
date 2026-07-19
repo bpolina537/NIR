@@ -18,6 +18,7 @@ let deliveryTerm = '—';
 let deliveryMap = null;
 let placemark = null;
 let citySelectedFromMap = false;
+let selectedMapCity = 'Москва';
 const cityCoordinates = {
     'Волгоград': [48.7080, 44.5133], 'Воронеж': [51.6608, 39.2003],
     'Екатеринбург': [56.8389, 60.6057], 'Казань': [55.7961, 49.1064],
@@ -82,6 +83,7 @@ if (typeof ymaps !== 'undefined') {
         deliveryMap.events.add('click', (event) => {
             const coords = event.get('coords');
             const detectedCity = nearestDeliveryCity(coords);
+            selectedMapCity = detectedCity;
             deliveryCitySelect.value = detectedCity;
             citySelectedFromMap = true;
             deliveryCitySelect.dispatchEvent(new Event('change'));
@@ -98,6 +100,7 @@ if (typeof ymaps !== 'undefined') {
 }
 
 deliveryCitySelect.addEventListener('change', () => {
+    if (deliveryCitySelect.value) selectedMapCity = deliveryCitySelect.value;
     resetDeliveryCalculation();
     if (citySelectedFromMap) {
         citySelectedFromMap = false;
@@ -142,6 +145,23 @@ submitButton.addEventListener('click', () => {
     if (!document.querySelector('#map-lat').value) errors.push(pickup ? 'Не отмечена точка самовывоза' : 'Не отмечен адрес доставки в выбранном городе');
     errorsBox.replaceChildren(...errors.map((text) => { const paragraph = document.createElement('p'); paragraph.textContent = text; return paragraph; }));
     if (errors.length) return;
+    const now = new Date();
+    AtmosferaCart.saveOrder({
+        id: `ATM-${String(now.getTime()).slice(-8)}`,
+        createdAt: now.toISOString(),
+        status: 'Оформлен',
+        items: orderedItems.map((item) => {
+            const product = productsById.get(item.id);
+            return { id: item.id, name: product.name, quantity: item.quantity, price: product.price };
+        }),
+        productsTotal,
+        deliveryMethod: pickup ? 'Самовывоз' : 'Курьерская доставка',
+        city: deliveryCitySelect.value || selectedMapCity,
+        coordinates: `${document.querySelector('#map-lat').value}, ${document.querySelector('#map-lng').value}`,
+        deliveryPrice: deliveryPrice || 0,
+        deliveryTerm: pickup ? 'Сегодня' : deliveryTerm,
+        total: productsTotal + (deliveryPrice || 0),
+    });
     const orderedIds = new Set(orderedItems.map((item) => item.id));
     AtmosferaCart.saveCart(AtmosferaCart.getCart().filter((item) => !orderedIds.has(item.id)));
     submitButton.textContent = '✔ Заказ оформлен!';
