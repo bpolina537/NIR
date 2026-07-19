@@ -43,7 +43,6 @@
         <p class="task-hint" style="margin-top:6px;font-size:11px"><span id="comment-count">0</span> / 500 символов</p>
     </div></div>
     <div id="form-errors" style="color:#bd4040;font-size:13px;margin-bottom:20px"></div>
-    <div id="form-success" style="display:none"></div>
 </form>
 <aside class="order">
     <h2>Ваш заказ</h2>
@@ -56,11 +55,13 @@
         <div class="total"><dt>Итого</dt><dd id="checkout-total">0 ₽</dd></div>
     </dl>
     <button class="button full" type="button" id="submit-order">Оформить заказ</button>
+    <div id="form-success" class="order-success" role="status" aria-live="polite" hidden></div>
     <small>Нажимая кнопку вы соглашаетесь.</small>
 </aside>
 </section>
 <script src="https://api-maps.yandex.ru/2.1/?apikey=ec6d1b31-d0d2-43af-9686-e448f71e1ad9&lang=ru_RU"></script>
 <script>window.STORE_PRODUCTS = <?= storeProductsForJs() ?>;</script>
 <script src="assets/js/checkout.js?v=<?= filemtime(__DIR__ . '/assets/js/checkout.js') ?>"></script>
+<script src="assets/js/checkout-map.js?v=<?= filemtime(__DIR__ . '/assets/js/checkout-map.js') ?>"></script>
 <script src="assets/js/delivery.js?v=<?= filemtime(__DIR__ . '/assets/js/delivery.js') ?>"></script>
 <?php require 'partials/footer.php'; ?>
