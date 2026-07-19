@@ -32,7 +32,9 @@ async function loadCities() {
         submitButton.disabled = false;
         cacheInfo.textContent = data.source === 'cache'
             ? 'Список городов загружен из кэша за сегодня'
-            : 'Список городов получен из сервиса и сохранён в кэш';
+            : data.source === 'fallback'
+                ? 'Внешний сервис временно недоступен: используется резервный список городов'
+                : 'Список городов получен из сервиса и сохранён в кэш';
         citySelect.dispatchEvent(new Event('change'));
     } catch (error) {
         citySelect.innerHTML = '<option value="">Города недоступны</option>';

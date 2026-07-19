@@ -1,4 +1,4 @@
-<?php require 'lib/store-products.php'; $title='Оформление заказа'; $page='checkout'; require 'partials/header.php'; ?>
+<?php require 'lib/store-products.php'; $deliveryCities=['Волгоград','Воронеж','Екатеринбург','Казань','Калуга','Красноярск','Москва','Нижний Новгород','Новосибирск','Омск','Орел','Пермь','Ростов-на-Дону','Самара','Санкт-Петербург','Тула','Уфа','Челябинск']; $title='Оформление заказа'; $page='checkout'; require 'partials/header.php'; ?>
 <section class="page-hero compact"><span class="eyebrow">Последний шаг</span><h1>Оформление заказа</h1></section>
 <section class="checkout">
 <form class="checkout-form" id="checkout-form" novalidate>
@@ -20,15 +20,15 @@
             <h3>Рассчитать стоимость доставки</h3>
             <div class="delivery-fields">
                 <label>Город
-                    <select id="delivery-city" required disabled>
-                        <option value="">Загрузка городов…</option>
+                    <select id="delivery-city" required>
+                        <?php foreach ($deliveryCities as $city): ?><option value="<?= htmlspecialchars($city) ?>" <?= $city === 'Москва' ? 'selected' : '' ?>><?= htmlspecialchars($city) ?></option><?php endforeach; ?>
                     </select>
                 </label>
                 <label>Вес заказа, кг (подставлен из корзины)
                     <input id="delivery-weight" type="number" min="1" step="1" value="1" required>
                 </label>
             </div>
-            <button class="button" id="calculate-delivery" type="button" disabled>Рассчитать</button>
+            <button class="button" id="calculate-delivery" type="button">Рассчитать</button>
             <div class="cache-info" id="cities-cache-info"></div>
             <div class="form-result" id="delivery-result" role="status" aria-live="polite"></div>
         </div>

@@ -31,25 +31,6 @@ if (filter_var($weightRaw, FILTER_VALIDATE_INT) === false || (int) $weightRaw <=
 }
 
 $weight = (int) $weightRaw;
-$url = 'http://exercise.develop.maximaster.ru/service/delivery/?' . http_build_query([
-    'city' => $city,
-    'weight' => $weight,
-]);
-$response = externalServiceRequest($url);
-
-if ($response['body'] === false || $response['status'] >= 400) {
-    http_response_code(502);
-    echo json_encode(['error' => 'Сервис расчёта доставки временно недоступен'], JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
-$result = decodeExternalJson((string) $response['body']);
-if (!is_array($result) || !isset($result['status'], $result['message'])) {
-    http_response_code(502);
-    echo json_encode(['error' => 'Сервис доставки вернул некорректные данные'], JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
 if ($city === 'Москва') {
     $daysFrom = 1; $daysTo = 2;
 } elseif ($city === 'Тула') {
@@ -57,6 +38,36 @@ if ($city === 'Москва') {
 } else {
     $daysFrom = 3 + (abs(crc32($city)) % 2);
     $daysTo = $daysFrom + 2;
+}
+
+function fallbackDelivery(string $city, int $weight, int $daysFrom, int $daysTo): never
+{
+    $cityRate = 350 + (abs(crc32($city)) % 650);
+    $price = $cityRate + $weight * 45;
+    echo json_encode([
+        'status' => 'OK',
+        'price' => $price,
+        'message' => "Внешний сервис временно недоступен. Резервный расчёт: доставка в г. {$city} груза весом {$weight} кг стоит {$price} руб.",
+        'days_from' => $daysFrom,
+        'days_to' => $daysTo,
+        'source' => 'fallback',
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+$url = 'http://exercise.develop.maximaster.ru/service/delivery/?' . http_build_query([
+    'city' => $city,
+    'weight' => $weight,
+]);
+$response = externalServiceRequest($url);
+
+if ($response['body'] === false || $response['status'] >= 400) {
+    fallbackDelivery($city, $weight, $daysFrom, $daysTo);
+}
+
+$result = decodeExternalJson((string) $response['body']);
+if (!is_array($result) || !isset($result['status'], $result['message'])) {
+    fallbackDelivery($city, $weight, $daysFrom, $daysTo);
 }
 
 echo json_encode([
