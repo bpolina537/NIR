@@ -36,10 +36,13 @@
         <nav>
             <a class="<?= ($adminPage ?? '') === 'dashboard' ? 'active' : '' ?>" href="admin.php">Все задания</a>
             <a class="<?= ($adminPage ?? '') === 'task-1' ? 'active' : '' ?>" href="js-task-1.php">JS 1 · Элемент</a>
-            <a href="checkout.php">JS 2 · Заказ</a>
+            <a href="checkout.php?from=tasks">JS 2 · Заказ</a>
             <a class="<?= ($adminPage ?? '') === 'products' ? 'active' : '' ?>" href="products-table.php">JS 3 · Товары</a>
             <a class="<?= ($adminPage ?? '') === 'cpu' ? 'active' : '' ?>" href="cpu-monitor.php">JS 4 · График</a>
             <a class="<?= ($adminPage ?? '') === 'spreadsheet' ? 'active' : '' ?>" href="spreadsheet.php">JS 5 · Таблица</a>
+            <a href="index.php?from=tasks#site-counter">PHP 1 · Счётчик</a>
+            <a href="guestbook.php?from=tasks">PHP 2 · Отзывы</a>
+            <a href="checkout.php?from=tasks#delivery-calculator">PHP 3 · Доставка</a>
             <a class="<?= ($adminPage ?? '') === 'php-rest' ? 'active' : '' ?>" href="rest-api.php">PHP 4 · REST API</a>
         </nav>
         <small>Учебные модули производственной практики. Авторизация для их просмотра не требуется.</small>

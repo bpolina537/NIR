@@ -8,7 +8,6 @@
         <a href="catalog.php">Каталог</a>
         <a href="checkout.php">Доставка и оплата</a>
         <a href="guestbook.php">Отзывы</a>
-        <a href="#">Возврат</a>
     </div>
     <div>
         <h3>Контакты</h3>

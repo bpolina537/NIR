@@ -15,7 +15,11 @@ $page = $page ?? '';
     <link rel="stylesheet" href="assets/css/fallbacks.css">
     <link rel="stylesheet" href="assets/css/client-php.css">
     <link rel="stylesheet" href="assets/css/cart.css">
-    <script src="assets/js/cart-common.js"></script>
+    <link rel="stylesheet" href="assets/css/orders.css">
+    <link rel="stylesheet" href="assets/css/mobile-nav.css">
+    <link rel="stylesheet" href="assets/css/back-to-tasks.css">
+    <script src="assets/js/mobile-nav.js" defer></script>
+    <script src="assets/js/cart-common.js?v=<?= filemtime(__DIR__ . '/../assets/js/cart-common.js') ?>"></script>
     <?php if (($page ?? '') === 'task-1'): ?>
         <link rel="stylesheet" href="assets/css/task.css">
     <?php endif; ?>
@@ -32,7 +36,8 @@ $page = $page ?? '';
 <div class="topline">Бесплатная доставка заказов от 5 000 ₽</div>
 <header class="header">
     <a class="logo" href="index.php">АТМОСФЕРА<span>дом в деталях</span></a>
-    <nav class="nav">
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню"><span></span><span></span><span></span></button>
+    <nav class="nav" id="main-nav">
         <a class="<?= $page === 'home' ? 'active' : '' ?>" href="index.php">Главная</a>
         <a class="<?= $page === 'catalog' ? 'active' : '' ?>" href="catalog.php">Каталог</a>
         <a class="<?= $page === 'reviews' ? 'active' : '' ?>" href="guestbook.php">Отзывы</a>
@@ -44,4 +49,7 @@ $page = $page ?? '';
         <a href="cart.php" aria-label="Корзина">Корзина <b id="cart-count">0</b></a>
     </div>
 </header>
+<?php if (($_GET['from'] ?? '') === 'tasks'): ?>
+    <a class="back-to-tasks" href="admin.php">← Вернуться к заданиям</a>
+<?php endif; ?>
 <main>
